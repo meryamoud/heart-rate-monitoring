@@ -9,11 +9,9 @@ public class Producer {
     private static final String TOPIC = "heart_rate";
 
     @Autowired
-    private KafkaTemplate<String, String> kafkaTemplate;
+    private KafkaTemplate<String, Integer> kafkaTemplate;
 
-    public void sendHeartRate(int bpm) {
-        String message = "Heart Rate: " + bpm + " BPM";
-        kafkaTemplate.send(TOPIC, message);
-        System.out.println("📤 Message envoyé à Kafka => " + message);
+    public void sendHeartRate(int heartRate) {
+        kafkaTemplate.send(TOPIC, heartRate);
     }
 }
