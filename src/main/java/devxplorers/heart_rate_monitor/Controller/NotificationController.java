@@ -1,6 +1,6 @@
 package devxplorers.heart_rate_monitor.Controller;
 
-import devxplorers.heart_rate_monitor.Service.TwilioService;
+import devxplorers.heart_rate_monitor.Twilio.TwilioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
