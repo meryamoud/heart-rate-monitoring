@@ -15,7 +15,7 @@ public class HeartRateSimulator {
 
     @Scheduled(fixedRate = 1000) // Generate heart rate every second
     public void simulateHeartRate() {
-        int heartRate = 60 + random.nextInt(40); // Random heart rate between 60 and 100
+        int heartRate = 40 + random.nextInt(80); // Random heart rate between 60 and 100
         heartRateProducer.sendHeartRate(heartRate);
     }
 }
