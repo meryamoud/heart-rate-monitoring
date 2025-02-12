@@ -1,5 +1,6 @@
-package devxplorers.heart_rate_monitor.Kafka;
+package devxplorers.heart_rate_monitor.HeartRate;
 
+import devxplorers.heart_rate_monitor.Kafka.Producer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
