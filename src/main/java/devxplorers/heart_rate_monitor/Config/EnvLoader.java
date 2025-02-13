@@ -12,4 +12,3 @@ public class EnvLoader {
         dotenv.entries().forEach(entry -> System.setProperty(entry.getKey(), entry.getValue()));
     }
 }
-

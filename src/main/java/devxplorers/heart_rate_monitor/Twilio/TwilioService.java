@@ -1,5 +1,6 @@
 package devxplorers.heart_rate_monitor.Twilio;
 
+import com.twilio.Twilio;
 import com.twilio.rest.api.v2010.account.Message;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -18,9 +19,9 @@ public class TwilioService {
     @Value("${twilio.phoneNumber}")
     private String twilioPhoneNumber;
 
-
-
     public void sendSms(String toPhoneNumber, String messageBody) {
+        Twilio.init(accountSid, authToken);  // Initialize Twilio with the instance variables
+
         Message message = Message.creator(
                 new com.twilio.type.PhoneNumber(toPhoneNumber),  // Destination phone number
                 new com.twilio.type.PhoneNumber(twilioPhoneNumber),  // Your Twilio phone number
