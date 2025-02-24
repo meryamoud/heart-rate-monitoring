@@ -1,0 +1,145 @@
+[33mcommit fd736d4458074aee297b61a8adecaf9572f4d4ca[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mcoospoH808S_connection_via_ant_dongle[m[33m, [m[1;31morigin/coospoH808S_connection_via_ant_dongle[m[33m)[m
+Author: maryem <maryemoudoud@gmail.com>
+Date:   Mon Feb 24 18:21:30 2025 +0100
+
+    coospo connection
+
+[33mcommit 970ecda47b4dda4cb5944d2684d117ba6bcb17fc[m
+Author: maryem <maryemoudoud@gmail.com>
+Date:   Mon Feb 24 17:58:20 2025 +0100
+
+    Removed embedded git repository openant
+
+[33mcommit a203e037502a94a8bae33bac1540291db34a205b[m
+Author: maryem <maryemoudoud@gmail.com>
+Date:   Sat Feb 15 01:10:22 2025 +0100
+
+    Removed embedded repository j-antplus
+
+[33mcommit 60b1c43b3cd4cedcfe83d00b5efcafe596cbf6b4[m[33m ([m[1;32mtwilio-branch[m[33m)[m
+Merge: 2e8cbf9 839a452
+Author: malakhbiyel <malak_hbiyel@outlook.fr>
+Date:   Thu Feb 13 01:26:34 2025 +0100
+
+    Elasticsearch and kibana configuration with conflict resolutions
+
+[33mcommit 2e8cbf972b04fb4867c8e1f24a820a39880b9a18[m
+Author: malakhbiyel <malak_hbiyel@outlook.fr>
+Date:   Thu Feb 13 00:44:41 2025 +0100
+
+    Elasticsearch and kibana configuration
+
+[33mcommit 839a4529b2183c8129158515c75895704f057857[m
+Merge: ceea951 9e4f5e2
+Author: malakhbiyel <125568401+malakhbiyel@users.noreply.github.com>
+Date:   Wed Feb 12 23:40:29 2025 +0100
+
+    Merge pull request #4 from meryamoud/twilio-branch
+    
+    Ajout de l'analyse des fréquences cardiaques et gestion des anomalies
+
+[33mcommit 9e4f5e25452777e25855ace5ebb51c6fd9cf0e0c[m
+Author: maryem <maryemoudoud@gmail.com>
+Date:   Wed Feb 12 23:27:39 2025 +0100
+
+    Ajout de l'analyse des fréquences cardiaques et gestion des anomalies
+
+[33mcommit ceea9513c07fecc4500a504fbad3e15c233c7538[m
+Merge: 3d7a57d bd17134
+Author: malakhbiyel <125568401+malakhbiyel@users.noreply.github.com>
+Date:   Wed Feb 12 13:23:48 2025 +0100
+
+    Merge pull request #3 from meryamoud/twilio-branch
+    
+    Modified files and added .env changes for Twilio integration
+
+[33mcommit bd171346e01f7ff9e0572632cb167adc6e767ad0[m
+Author: maryem <maryemoudoud@gmail.com>
+Date:   Wed Feb 12 13:21:06 2025 +0100
+
+    Modified files and added .env changes for Twilio integration
+
+[33mcommit 3d7a57dda6a5705d6d6d94604c70349fec3cb6d3[m
+Merge: 5eba23f ada58cf
+Author: malakhbiyel <125568401+malakhbiyel@users.noreply.github.com>
+Date:   Wed Feb 12 11:26:22 2025 +0100
+
+    Merge pull request #2 from meryamoud/twilio-branch
+    
+    Twilio integration updates
+
+[33mcommit ada58cf40cf7f7fbd3cae29b03794cf0912bfb2c[m
+Author: maryem <maryemoudoud@gmail.com>
+Date:   Tue Feb 11 22:17:19 2025 +0100
+
+    Twilio integration updates
+
+[33mcommit 5eba23ff0d261b36ba65257f8ffb77c63012ed38[m[33m ([m[1;32mmaster[m[33m)[m
+Author: malakhbiyel <malak_hbiyel@outlook.fr>
+Date:   Tue Feb 11 00:14:09 2025 +0100
+
+    Solved the heart rate simulator error
+
+[33mcommit 16baa5072c27da348e7360eee57d7ea292745d96[m
+Author: malakhbiyel <malak_hbiyel@outlook.fr>
+Date:   Mon Feb 10 19:47:54 2025 +0100
+
+    Heart rate simulator with error
+
+[33mcommit ca4733f8c9967531a9edfe05d53bcbb6901fc045[m
+Author: malakhbiyel <malak_hbiyel@outlook.fr>
+Date:   Mon Feb 10 15:52:09 2025 +0100
+
+    Added BlueCove dependency and renamed Twilio folder
+
+[33mcommit 4dcb12cae40002415b9d53a43993feca788b7845[m
+Merge: 3156c3f 857c1a8
+Author: malakhbiyel <125568401+malakhbiyel@users.noreply.github.com>
+Date:   Thu Feb 6 08:03:08 2025 +0100
+
+    Merge pull request #1 from meryamoud/twilio-branch
+    
+    Implement Twilio SMS service functionality
+
+[33mcommit 857c1a83cfe256f35e6076ce2a567eab96d1f92e[m
+Author: maryem <maryemoudoud@gmail.com>
+Date:   Wed Feb 5 23:50:30 2025 +0100
+
+    Implement Twilio SMS service functionality
+
+[33mcommit 3156c3f78a4efc7cc52324561f9d093a728d6602[m[33m ([m[1;31mupstream/master[m[33m)[m
+Merge: 9a23efa 7ce1711
+Author: malakhbiyel <malak_hbiyel@outlook.fr>
+Date:   Sun Feb 2 23:58:57 2025 +0100
+
+    Merge branch 'master' of https://github.com/malakhbiyel/heart-rate-monitoring
+
+[33mcommit 9a23efa294e6b0d33a0304debf3d08282f81342e[m
+Author: malakhbiyel <malak_hbiyel@outlook.fr>
+Date:   Sun Feb 2 23:57:21 2025 +0100
+
+    third commit
+
+[33mcommit 7ce1711ca4e0956139a38955b423cda3d953012f[m
+Author: malakhbiyel <125568401+malakhbiyel@users.noreply.github.com>
+Date:   Sun Feb 2 11:59:57 2025 +0100
+
+    Update README.md
+
+[33mcommit b6c97519fd9fb00bc597f133b6b8463cddd9cd22[m
+Author: malakhbiyel <125568401+malakhbiyel@users.noreply.github.com>
+Date:   Sun Feb 2 11:58:44 2025 +0100
+
+    Update README.md
+
+[33mcommit 381bd075f962e0a24cc69d7fa6594dce7f0f2b7a[m
+Author: malakhbiyel <malak_hbiyel@outlook.fr>
+Date:   Sun Feb 2 11:33:16 2025 +0100
+
+    second commit
+
+[33mcommit ee61125040988c9e3c5d6f7e461c794157dfc759[m
+Author: malakhbiyel <malak_hbiyel@outlook.fr>
+Date:   Sun Feb 2 11:32:18 2025 +0100
+
+    first commit
