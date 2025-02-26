@@ -1,14 +1,23 @@
 package devxplorers.heart_rate_monitor.HeartRate;
 
+import devxplorers.heart_rate_monitor.Kafka.Producer;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.io.*;
 
 public class LogReader {
+
+    private static final String FILE_PATH = "C:/Users/pavilion/Desktop/logreader/SimulANT+ Logs - 808S 0043102/Heart Rate Display ANT Messages.txt";
+
+    @Autowired
+    private static Producer kafkaProducer;
+
     public static void main(String[] args) {
-        // Path to the log file
-        String filePath = "C:/Users/pavilion/Desktop/logreader/SimulANT+ Logs - 808S 0043102/Heart Rate Display ANT Messages.txt";
+        // Initialize Kafka producer
+        kafkaProducer = new Producer();
 
         // Read and decrypt the logs
-        readAndDecryptLogs(filePath);
+        readAndDecryptLogs(FILE_PATH);
     }
 
     public static void readAndDecryptLogs(String filePath) {
@@ -44,7 +53,11 @@ public class LogReader {
 
                             // Skip if the current heart rate is the same as the last heart rate (consecutive)
                             if (lastHeartRate == null || currentHeartRate != lastHeartRate) {
-                                System.out.println("Decrypted Heart Rate: " + currentHeartRate);
+                                // Generate the current timestamp for the heart rate
+                                long timestamp = System.currentTimeMillis();
+
+                                // Send valid heart rate to Kafka with the generated timestamp
+                                kafkaProducer.sendHeartRateWithTimestamp(currentHeartRate, timestamp);
                             }
                             lastHeartRate = currentHeartRate;  // Update the last heart rate value
                         } else {

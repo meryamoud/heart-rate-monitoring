@@ -12,10 +12,9 @@ public class Producer {
     @Autowired
     private KafkaTemplate<String, Integer> kafkaTemplate;
 
-    public void sendHeartRate(int heartRate) {
-        long timestamp = System.currentTimeMillis(); // Génération du timestamp
+    public void sendHeartRateWithTimestamp(int heartRate, long timestamp) {
         ProducerRecord<String, Integer> record = new ProducerRecord<>(TOPIC, null, timestamp, null, heartRate);
-        kafkaTemplate.send(record); // Envoi du message avec le timestamp
+        kafkaTemplate.send(record); // Send the message with the timestamp
 
         System.out.println("Sent: HeartRate = " + heartRate + " at " + timestamp);
     }
