@@ -63,16 +63,13 @@ public class KafkaConsumer {
                 if (heartRate >= HIGH_HEART_RATE || heartRate <= LOW_HEART_RATE) {
                     String message1 = "Alerte : Fréquence cardiaque anormale détectée ! (" + heartRate + " BPM)";
                     twilioService.sendSms(TEST_PHONE_NUMBER, message1);
-                    System.out.println("Notification envoyée via Twilio !");
+                    //System.out.println("Notification envoyée via Twilio !");
                 }
 
                 if (deviation > 15) {
                     String message2 = "Alerte : Fréquence cardiaque instable détectée ! (Déviation élevée)";
                     twilioService.sendSms(TEST_PHONE_NUMBER, message2);
                     System.out.println("Notification envoyée pour instabilité cardiaque !");
-
-                } else {
-                System.err.println("❌ Message mal formaté : " + message);
             }
         }
         }catch (NumberFormatException e) {

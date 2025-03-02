@@ -61,7 +61,7 @@ public class LogReader {
         try {
             byte[] byteData = hexStringToByteArray(heartRateData);
             if (byteData.length >= 8) {
-                return String.valueOf(byteData[4] & 0xFF);
+                return String.valueOf(byteData[7] & 0xFF);
             }
         } catch (Exception e) {
             e.printStackTrace();

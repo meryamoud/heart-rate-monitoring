@@ -10,6 +10,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class TwilioService {
 
+    @Value("${twilio.enabled:false}") // Valeur par défaut : false
+    private boolean isTwilioEnabled;
+
     @Value("${twilio.accountSid}")
     private String accountSid;
 
@@ -20,6 +23,10 @@ public class TwilioService {
     private String twilioPhoneNumber;
 
     public void sendSms(String toPhoneNumber, String messageBody) {
+        if (!isTwilioEnabled) {
+            System.out.println("Twilio est désactivé. Aucun SMS envoyé.");
+            return;
+        }
         Twilio.init(accountSid, authToken);  // Initialize Twilio with the instance variables
 
         Message message = Message.creator(
@@ -28,6 +35,6 @@ public class TwilioService {
                 messageBody  // Message body
         ).create();
 
-        System.out.println("SMS sent successfully to " + toPhoneNumber + " with SID: " + message.getSid());
+        System.out.println("SMS envoyé avec succès à " + toPhoneNumber + " avec SID: " + message.getSid());
     }
 }
