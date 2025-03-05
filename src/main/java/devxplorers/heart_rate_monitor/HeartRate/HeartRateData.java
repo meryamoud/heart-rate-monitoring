@@ -7,12 +7,10 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
 import java.util.Date;
 
 
-@Document(indexName = "heart_rate_index")
+@Document(indexName = "heart_rate")
 public class HeartRateData {
 
     @Id
@@ -22,9 +20,9 @@ public class HeartRateData {
     @Field(type = FieldType.Date)  // Stocke en tant que type `date` dans Elasticsearch
     private Date timestamp;
 
-    public HeartRateData(int heartRate) {
+    public HeartRateData(int heartRate,Date timestamp) {
         this.heartRate = heartRate;
-        this.timestamp = Date.from(LocalDateTime.now().toInstant(ZoneOffset.UTC)); // Timestamp du moment où on stocke la donnée
+        this.timestamp = timestamp; // Timestamp du moment où on stocke la donnée
     }
     public String getId() { return id; }
     public void setId(String id) { this.id = id; }
