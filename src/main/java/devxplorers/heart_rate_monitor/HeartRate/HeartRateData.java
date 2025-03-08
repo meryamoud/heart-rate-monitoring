@@ -1,7 +1,5 @@
 package devxplorers.heart_rate_monitor.HeartRate;
 
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
@@ -14,23 +12,15 @@ import java.util.Date;
 public class HeartRateData {
 
     @Id
-    private String id; // L'ID généré par Elasticsearch
+    private String id;
 
     private int heartRate;
-    @Field(type = FieldType.Date)  // Stocke en tant que type `date` dans Elasticsearch
+    @Field(type = FieldType.Date)
     private Date timestamp;
 
     public HeartRateData(int heartRate,Date timestamp) {
         this.heartRate = heartRate;
-        this.timestamp = timestamp; // Timestamp du moment où on stocke la donnée
+        this.timestamp = timestamp;
     }
-    public String getId() { return id; }
-    public void setId(String id) { this.id = id; }
-
-    public int getHeartRate() { return heartRate; }
-    public void setHeartRate(int heartRate) { this.heartRate = heartRate; }
-
-    public Date getTimestamp() { return timestamp; }
-    public void setTimestamp(Date timestamp) { this.timestamp = timestamp; }
 
 }

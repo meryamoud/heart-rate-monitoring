@@ -12,6 +12,6 @@ public class HeartRateController {
 
     @GetMapping("/all")  // Correction de la route
     public Iterable<HeartRateData> getAllHeartRateData() {
-        return heartRateRepository.findAll();  // Récupère toutes les données depuis Elasticsearch
+        return heartRateRepository.findAll();
     }
 }

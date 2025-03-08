@@ -34,14 +34,13 @@ public class KafkaConsumer {
     private Queue<Integer> recentHeartRates = new LinkedList<>();
     private int sum = 0;
 
-    // Date format to parse the timestamp from LogReader
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
     private static final Logger log = LoggerFactory.getLogger(KafkaConsumer.class);
     @KafkaListener(topics = "heart_rate", groupId = "heart_rate_group")
     public void consume(String message) {
         log.info("Message reçu et traité : {}", message);
         try {
-            // Format attendu : "Time: 2025-03-03T12:30:45.123, Heart Rate: 85"
+
             String[] parts = message.split(", Heart Rate: ");
             if (parts.length != 2) {
                 System.err.println("❌ Format de message invalide : " + message);
@@ -51,27 +50,24 @@ public class KafkaConsumer {
             String timeString = parts[0].replace("Time: ", "").trim();
             int heartRate = Integer.parseInt(parts[1].trim());
 
-            // Ajouter ".000" si la date ne contient pas de millisecondes
-            if (timeString.length() == 19) { // Format sans millisecondes
-                timeString += ".000"; // Ajout des millisecondes par défaut
+
+            if (timeString.length() == 19) {
+                timeString += ".000";
             }
 
-            // Convertir la chaîne de timestamp en Date (avec millisecondes)
             Date timestamp;
             try {
-                timestamp = dateFormat.parse(timeString); // Utilisation du format avec précision (millisecondes)
+                timestamp = dateFormat.parse(timeString);
             } catch (ParseException e) {
                 System.err.println("❌ Erreur de parsing du timestamp : " + timeString);
                 return;
             }
 
-            // Créer un objet HeartRateData avec le timestamp extrait
             HeartRateData data = new HeartRateData(heartRate, timestamp);
             heartRateRepository.save(data);
 
             System.out.println("📥 Stocké dans Elasticsearch : " + heartRate + " BPM à " + timestamp);
 
-            // Mettre à jour la fenêtre mobile pour les calculs de fréquence cardiaque
             recentHeartRates.add(heartRate);
             sum += heartRate;
             if (recentHeartRates.size() > WINDOW_SIZE) {
@@ -83,7 +79,6 @@ public class KafkaConsumer {
 
             System.out.println("📊 Moyenne fréquence cardiaque : " + average + ", Écart type : " + deviation);
 
-            // Vérification pour une fréquence cardiaque anormale
             if (heartRate >= HIGH_HEART_RATE || heartRate <= LOW_HEART_RATE) {
                 String alertMessage = "⚠️ Alerte : Fréquence cardiaque anormale détectée! (" + heartRate + " BPM)";
                 twilioService.sendSms(TEST_PHONE_NUMBER, alertMessage);

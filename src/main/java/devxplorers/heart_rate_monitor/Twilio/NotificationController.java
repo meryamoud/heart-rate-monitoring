@@ -14,6 +14,6 @@ public class NotificationController {
     @PostMapping("/send-sms")
     public String sendSms(@RequestParam String phoneNumber, @RequestParam String message) {
         twilioService.sendSms(phoneNumber, message);
-        return "SMS sent successfully!";
+        return "SMS envoyé avec succès!";
     }
 }

@@ -27,12 +27,11 @@ public class TwilioService {
             System.out.println("Twilio est désactivé. Aucun SMS envoyé.");
             return;
         }
-        Twilio.init(accountSid, authToken);  // Initialize Twilio with the instance variables
-
+        Twilio.init(accountSid, authToken);
         Message message = Message.creator(
                 new com.twilio.type.PhoneNumber(toPhoneNumber),  // Destination phone number
                 new com.twilio.type.PhoneNumber(twilioPhoneNumber),  // Your Twilio phone number
-                messageBody  // Message body
+                messageBody
         ).create();
 
         System.out.println("SMS envoyé avec succès à " + toPhoneNumber + " avec SID: " + message.getSid());

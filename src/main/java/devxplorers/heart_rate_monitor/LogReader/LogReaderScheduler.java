@@ -15,7 +15,7 @@ public class LogReaderScheduler {
         this.logReader = logReader;
     }
 
-    @Scheduled(fixedRate = 10000) // Exécute toutes les 10 secondes
+    @Scheduled(fixedRate = 10000)
     public void scheduleLogReading() {
         System.out.println("Lecture des logs en cours...");
         logReader.readAndSendLogs(filePath);

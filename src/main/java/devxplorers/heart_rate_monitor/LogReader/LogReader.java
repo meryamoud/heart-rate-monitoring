@@ -11,64 +11,54 @@ import java.util.regex.*;
 @Component
 public class LogReader {
     private final KafkaProducer kafkaProducer;
-    private static final String SESSION_DATE_PATTERN = "(\\d{2}/\\d{2}/\\d{4})\\s(\\d{2}:\\d{2}:\\d{2})";  // Pattern to extract session date
-    private static final String TIMESTAMP_PATTERN = "(\\d+)\\s:\\sRx:\\s\\[[^\\]]+\\]";  // Pattern to extract timestamp
-    private static final String POSITION_FILE = "processed_position.txt"; // Fichier pour sauvegarder la position lue
+    private static final String SESSION_DATE_PATTERN = "(\\d{2}/\\d{2}/\\d{4})\\s(\\d{2}:\\d{2}:\\d{2})";
+    private static final String TIMESTAMP_PATTERN = "(\\d+)\\s:\\sRx:\\s\\[[^\\]]+\\]";
+    private static final String POSITION_FILE = "processed_position.txt";
 
     public LogReader(KafkaProducer kafkaProducer) {
         this.kafkaProducer = kafkaProducer;
     }
 
     public void readAndSendLogs(String filePath) {
-        long lastReadPosition = getLastReadPosition();  // Récupérer la dernière position lue
+        long lastReadPosition = getLastReadPosition();
         try (RandomAccessFile logFile = new RandomAccessFile(filePath, "r")) {
-            logFile.seek(lastReadPosition); // Se positionner à la dernière position lue
+            logFile.seek(lastReadPosition);
             String line;
             Integer lastHeartRate = null;
             int messageCount = 0;
-            long previousTimestamp = -1;  // Pour stocker le timestamp précédent
+            long previousTimestamp = -1;
             String sessionDate = "";
             LocalDateTime sessionDateTime = null;
 
-            // DateTimeFormatter pour le format de la date de session
             DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
             while ((line = logFile.readLine()) != null) {
-                // Vérifier la date de session (la première ligne contient la date de session)
+
                 Pattern datePattern = Pattern.compile(SESSION_DATE_PATTERN);
                 Matcher dateMatcher = datePattern.matcher(line);
 
                 if (dateMatcher.find()) {
-                    // Capturer la date de session et la convertir en LocalDateTime
                     sessionDate = dateMatcher.group(1) + " " + dateMatcher.group(2);
                     sessionDateTime = LocalDateTime.parse(sessionDate, dateFormatter);
                     System.out.println("New Session Date: " + sessionDateTime);
-                    continue;  // Passer la ligne contenant la date de session
+                    continue;
                 }
 
-                // Vérifier les lignes de log avec les timestamps
                 Pattern timestampPatternCompiled = Pattern.compile(TIMESTAMP_PATTERN);
                 Matcher timestampMatcher = timestampPatternCompiled.matcher(line);
 
                 if (timestampMatcher.find()) {
-                    // Capturer le timestamp actuel (en millisecondes)
+
                     long currentTimestamp = Long.parseLong(timestampMatcher.group(1));
-
-                    // Si nous avons un timestamp précédent, calculer la différence
                     if (previousTimestamp != -1) {
-                        // Calculer la différence en millisecondes entre le timestamp actuel et le précédent
                         long diffInMillis = currentTimestamp - previousTimestamp;
-
-                        // Ajouter la différence au timestamp de session
                         if (sessionDateTime != null) {
                             sessionDateTime = sessionDateTime.plus(diffInMillis, ChronoUnit.MILLIS);
                         }
                     }
 
-                    // Mettre à jour le timestamp précédent pour la prochaine itération
                     previousTimestamp = currentTimestamp;
 
-                    // Extraire et traiter les données de fréquence cardiaque
                     messageCount++;
                     if (messageCount == 22) {
                         messageCount = 1;
@@ -82,16 +72,14 @@ public class LogReader {
                             int currentHeartRate = Integer.parseInt(decryptedHeartRate);
                             if (currentHeartRate >= 30 && currentHeartRate <= 200) {
                                 if (lastHeartRate == null || currentHeartRate != lastHeartRate) {
-                                    // Préparer le message combiné avec l'heure de session et la fréquence cardiaque
                                     String message = "Time: " + sessionDateTime + ", Heart Rate: " + currentHeartRate;
-                                    kafkaProducer.sendMessage(message);  // Envoyer le message à Kafka
+                                    kafkaProducer.sendMessage(message);
                                 }
                                 lastHeartRate = currentHeartRate;
                             }
                         }
                     }
                 }
-                // Sauvegarder la position lue
                 updateLastReadPosition(logFile.getFilePointer());
             }
         } catch (IOException e) {
@@ -131,7 +119,6 @@ public class LogReader {
         return data;
     }
 
-    // Récupérer la dernière position lue dans le fichier
     private long getLastReadPosition() {
         File positionFile = new File(POSITION_FILE);
         if (positionFile.exists()) {
@@ -141,10 +128,9 @@ public class LogReader {
                 e.printStackTrace();
             }
         }
-        return 0; // Si le fichier n'existe pas, commencer à partir du début
+        return 0;
     }
 
-    // Mettre à jour la position lue dans le fichier
     private void updateLastReadPosition(long newPosition) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(POSITION_FILE))) {
             writer.write(String.valueOf(newPosition));
