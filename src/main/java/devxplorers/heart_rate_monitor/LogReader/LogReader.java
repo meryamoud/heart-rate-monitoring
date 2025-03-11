@@ -29,7 +29,6 @@ public class LogReader {
             long previousTimestamp = -1;
             String sessionDate = "";
             LocalDateTime sessionDateTime = null;
-
             DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
             while ((line = logFile.readLine()) != null) {

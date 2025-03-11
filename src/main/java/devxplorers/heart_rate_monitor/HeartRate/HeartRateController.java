@@ -10,7 +10,7 @@ public class HeartRateController {
     @Autowired
     private HeartRateRepository heartRateRepository;
 
-    @GetMapping("/all")  // Correction de la route
+    @GetMapping("/all")
     public Iterable<HeartRateData> getAllHeartRateData() {
         return heartRateRepository.findAll();
     }
