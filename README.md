@@ -12,7 +12,8 @@ L'architecture repose sur plusieurs composants interconnectés :
 - **Docker** : Conteneurisation des services.
 
 ### Diagramme d'architecture
-![Architecture]![logreader (2)](https://github.com/user-attachments/assets/936d13d3-c8b9-4e8c-9fb4-cde934501987)
+![logreader (2)](https://github.com/user-attachments/assets/538a730e-ed55-4dd6-8e36-c4ff7729f136)
+
 
 
 ## Installation et Configuration
